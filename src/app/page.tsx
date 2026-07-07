@@ -6,7 +6,7 @@ interface Song {
   url: string;
 }
 
-const CLOUDFLARE_URL = "https://lance-movement-reliability-fares.trycloudflare.com";
+const CLOUDFLARE_URL = "https://continent-receipt-obligation-moscow.trycloudflare.com";
 
 async function getSongsFromHTML(): Promise<Song[]> {
   try {
