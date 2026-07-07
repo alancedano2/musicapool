@@ -7,7 +7,6 @@ interface Song {
   url: string;
 }
 
-// ARREGLADO: Le ponemos '= []' para que si por algún error llega undefined, no explote el forEach
 export default function SearchableList({ initialSongs = [] }: { initialSongs?: Song[] }) {
   const [search, setSearch] = useState('');
   const [selectedArtist, setSelectedArtist] = useState<string | null>(null);
@@ -52,7 +51,8 @@ export default function SearchableList({ initialSongs = [] }: { initialSongs?: S
       if (selectedArtist) {
         const cleanSongName = removeAccents(song.name.toLowerCase());
         const cleanSelectedArtist = removeAccents(selectedArtist.toLowerCase());
-        matchesArtist = cleanSongName.startsWith(cleanSelectedArtist);
+        // MEJORADO: Cambiado .startsWith por .includes para mayor flexibilidad
+        matchesArtist = cleanSongName.includes(cleanSelectedArtist);
       }
 
       const matchesSearch = removeAccents(song.name.toLowerCase())
@@ -96,8 +96,9 @@ export default function SearchableList({ initialSongs = [] }: { initialSongs?: S
 
           {artists.map(artist => {
             const cleanArtist = removeAccents(artist.toLowerCase());
+            // MEJORADO: Modificado también aquí para reflejar el conteo real usando .includes
             const count = initialSongs.filter(s => 
-              removeAccents(s.name.toLowerCase()).startsWith(cleanArtist)
+              removeAccents(s.name.toLowerCase()).includes(cleanArtist)
             ).length;
 
             return (
