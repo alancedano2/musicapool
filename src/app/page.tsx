@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchableList from './SearchableList'; // Asegúrate de ajustar la ruta
+import SearchableList from './SearchableList';
 
 interface Song {
   name: string;
